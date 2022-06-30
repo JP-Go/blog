@@ -10,6 +10,4 @@ export const HeaderContainerStyled = styled("header")`
   display: flex;
   align-items: center;
   border-bottom: solid 4px ${({ theme }) => theme?.palletes.light?.tertiary};
-  margin-bottom: 2rem;
-
 `;

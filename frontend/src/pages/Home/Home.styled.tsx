@@ -13,4 +13,5 @@ export const HomeMainStyled = styled("main")`
   justify-content: center;
   flex-direction: column;
   gap: 1.25rem;
+	padding-top:1rem;
 `;
