@@ -7,21 +7,31 @@ import {
   CardFooterStyled,
 } from "./Card.styled";
 
-const ArticleCard: Component = () => {
+export interface CardProps {
+  meta: {
+    title: string;
+    description: string;
+    lastUpdated: Date;
+    author: string;
+  };
+}
+
+const LOCALE = "pt-BR";
+
+const Card: Component<CardProps> = ({
+  meta,
+}: CardProps) => {
   return (
     <CardStyled>
-      <CardTitleStyled>A title</CardTitleStyled>
+      <CardTitleStyled>{meta.title}</CardTitleStyled>
       <CardSepStyled />
-      <CardDescriptionStyled>
-        Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint
-        cillum sint consectetur cupidatat.
-      </CardDescriptionStyled>
+      <CardDescriptionStyled>{meta.description}</CardDescriptionStyled>
       <CardFooterStyled>
-        <span>30.06.2022</span>
-        <span>João Pedro</span>
+        <span>{meta.lastUpdated.toLocaleDateString(LOCALE)}</span>
+        <span>{meta.author}</span>
       </CardFooterStyled>
     </CardStyled>
   );
 };
 
-export default ArticleCard;
+export default Card;
