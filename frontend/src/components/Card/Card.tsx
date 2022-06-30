@@ -1,4 +1,5 @@
 import { Component } from "solid-js";
+import { Link } from "solid-app-router";
 import {
   CardStyled,
   CardTitleStyled,
@@ -9,6 +10,7 @@ import {
 
 export interface CardProps {
   meta: {
+    slug: string;
     title: string;
     description: string;
     lastUpdated: Date;
@@ -18,19 +20,19 @@ export interface CardProps {
 
 const LOCALE = "pt-BR";
 
-const Card: Component<CardProps> = ({
-  meta,
-}: CardProps) => {
+const Card: Component<CardProps> = ({ meta }: CardProps) => {
   return (
-    <CardStyled>
-      <CardTitleStyled>{meta.title}</CardTitleStyled>
-      <CardSepStyled />
-      <CardDescriptionStyled>{meta.description}</CardDescriptionStyled>
-      <CardFooterStyled>
-        <span>{meta.lastUpdated.toLocaleDateString(LOCALE)}</span>
-        <span>{meta.author}</span>
-      </CardFooterStyled>
-    </CardStyled>
+    <Link href={`/article/${meta.slug}`} style="text-decoration:none">
+      <CardStyled>
+        <CardTitleStyled>{meta.title}</CardTitleStyled>
+        <CardSepStyled />
+        <CardDescriptionStyled>{meta.description}</CardDescriptionStyled>
+        <CardFooterStyled>
+          <span>{meta.lastUpdated.toLocaleDateString(LOCALE)}</span>
+          <span>{meta.author}</span>
+        </CardFooterStyled>
+      </CardStyled>
+    </Link>
   );
 };
 

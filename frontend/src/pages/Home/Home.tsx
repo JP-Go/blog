@@ -1,11 +1,11 @@
 import { For, Component, createSignal } from "solid-js";
-import Header from "../../components/Header/Header";
 import Card, { CardProps } from "../../components/Card/Card";
 import { HomeContainerStyled, HomeMainStyled } from "./Home.styled";
 
 const mockArticles: CardProps[] = [
   {
     meta: {
+			slug:'a-title',
       title: "A title",
       description:
         "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
@@ -15,6 +15,7 @@ const mockArticles: CardProps[] = [
   },
   {
     meta: {
+      slug: "another-title",
       title: "Another title",
       description:
         "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
@@ -24,6 +25,7 @@ const mockArticles: CardProps[] = [
   },
   {
     meta: {
+      slug: "and-another-title-title",
       title: "And another title title",
       description:
         "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
@@ -34,12 +36,10 @@ const mockArticles: CardProps[] = [
 ];
 
 const Home: Component = () => {
-  // @ts-ignore: next-line
   const [articles] = createSignal<CardProps[]>(mockArticles);
 
   return (
     <HomeContainerStyled>
-      <Header />
       <HomeMainStyled>
         <For each={articles()}>
           {({ meta }) => (
