@@ -5,7 +5,7 @@ export const CardStyled = styled("div")`
 	color: ${(props) => props.theme?.palletes.light?.tertiary};
   padding: 1rem 1rem;
   border: solid 2px ${(props) => props.theme?.palletes.light?.fg};
-  width: clamp(100px, 600px, 640px);
+  width: clamp(100px, 80vw, 640px);
   height: clamp(20%, 240px, 300px);
   transition: all ease 200ms;
 
@@ -30,3 +30,10 @@ export const CardDescriptionStyled = styled("p")`
   height: fit-content;
 	color: ${(props) => props.theme?.palletes.light?.fg};
 `;
+
+export const CardFooterStyled = styled('footer')`
+	height: 1rem;
+	font-size: 0.75rem;
+	display: flex;
+	justify-content: space-between;
+`
