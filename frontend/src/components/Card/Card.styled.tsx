@@ -1,7 +1,8 @@
 import { styled } from "solid-styled-components";
 
 export const CardStyled = styled("div")`
-  border-radius: 4px;
+  border-radius: 0.5rem;
+	color: ${(props) => props.theme?.palletes.light?.tertiary};
   padding: 1rem 1rem;
   border: solid 2px ${(props) => props.theme?.palletes.light?.fg};
   width: clamp(100px, 600px, 640px);
@@ -27,4 +28,5 @@ export const CardSepStyled = styled("div")`
 export const CardDescriptionStyled = styled("p")`
   width: 100%;
   height: fit-content;
+	color: ${(props) => props.theme?.palletes.light?.fg};
 `;
