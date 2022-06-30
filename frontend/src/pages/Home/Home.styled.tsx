@@ -3,7 +3,8 @@ export const HomeContainerStyled = styled("div")`
   background-color: ${({ theme }) => theme?.palletes.light?.primary};
   margin: 0;
   padding: 0;
-  height: 100vh;
+  height: 100%;
+	width: 100%;
 `;
 
 export const HomeMainStyled = styled("main")`
