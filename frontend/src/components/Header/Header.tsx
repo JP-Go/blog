@@ -1,8 +1,12 @@
 import { Component } from "solid-js";
-import { NavbarStyled } from "./Header.styled";
+import { HeaderContainerStyled } from "./Header.styled";
 
-const Header:Component = ()=>{
-	return <NavbarStyled>Test</NavbarStyled>
-}
+const Header: Component = () => {
+  return (
+    <HeaderContainerStyled>
+      <h1>JP's Blog</h1>
+    </HeaderContainerStyled>
+  );
+};
 
-export default Header
+export default Header;

@@ -1,8 +1,15 @@
 import { styled } from "solid-styled-components";
 
-export const NavbarStyled = styled('nav')`
-	background-color: blue;
-	width: 100%;
-	color: red;
-	font-size: 2rem;
-`
+export const HeaderContainerStyled = styled("header")`
+  background-color: ${({ theme }) => theme?.palletes.light?.secondary};
+  margin: 0;
+  height: 64px;
+  padding-left: 2rem;
+  width: 100%;
+  color: ${({ theme }) => theme?.palletes.light?.primary};
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  border-bottom: solid 4px ${({ theme }) => theme?.palletes.light?.tertiary};
+  margin-bottom: 2rem;
+`;
