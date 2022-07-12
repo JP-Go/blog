@@ -1,16 +1,16 @@
 from flask import Flask, jsonify
+from .db import AuthorDB
 
 app = Flask(__name__)
+author_db = AuthorDB('sqlite:///test.sqlite')
 
 
-@app.route("/articles")
-def get_articles():
-    return jsonify([{"teste": "umteste"}])
+@app.get('/')
+def index():
+    return "<p>Hello</p>"
 
 
-# @app.get(rule="/article/<str:slug>")
-# def get_article_by_slug(slug):
-#     # query the database for the slug
-#     # if there's a database entry with slug
-#     # return data as json
-#     return NotImplemented
+@app.get('/authors')
+def get_authors():
+    authors = author_db.get_all()
+    return jsonify(list(map(lambda x: x.as_dict(), authors)))

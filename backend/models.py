@@ -1,15 +1,49 @@
-from dataclasses import dataclass
-from datetime import datetime
+from typing import Any, Dict
+from sqlalchemy import Column, ForeignKey, Integer, String, Date
+from sqlalchemy.orm import declarative_base
+from datetime import date
+
+Base = declarative_base()
 
 
-@dataclass()
-class ArticleMetadata:
-    id:int
-    slug:str
-    title:str
-    last_updated:datetime
+class Author(Base):
+    """ A author of a article in the database.
+        They have:
+            - a name(String, req);
+            - an Id(Int, PK); and
+            - a list of article ids(Int,FK) attributed to they
 
-@dataclass(order=True)
-class Article:
-    meta:ArticleMetadata
-    content: str
+        It represents a row in the 'author' table
+    """
+    __tablename__ = 'author'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    articles = Column(Integer, default=None)
+
+    def __repr__(self) -> str:
+        return (f"Author(id={self.id}, name={self.name},"
+                "articles={self.articles})")
+
+    def as_dict(self) -> Dict[str, Any]:
+        return {"id": self.id, "name": self.name, "articles": self.articles}
+
+
+class Article(Base):
+    """ An article on a blog (blog post).
+    It has:
+        - id (Int, PK)
+        - author_id (Int,req) (a reference to the author),
+        - created (Date,req)
+        - last_update (Date,req)
+        - title (String,req)
+        - body  (String,req)
+
+    It represents a row in the 'article' table
+    """
+    __tablename__ = 'article'
+    id = Column(Integer, primary_key=True)
+    title = Column(String)
+    body = Column(String)
+    created = Column(Date, default=date.today())
+    last_update = Column(Date, default=date.today())
+    author_id = Column(Integer, ForeignKey("author.id"))
