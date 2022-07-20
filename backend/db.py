@@ -11,7 +11,7 @@ class ArticleDB:
         self.engine = create_engine(uri, echo=True, future=True)
         self.session = sessionmaker(self.engine)
 
-    def get_all(self) -> List[Article]:
+    def find_all(self) -> List[Article]:
         with self.session() as session:
             list = session.query(Article).all()
             return list
