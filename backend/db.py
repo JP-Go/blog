@@ -18,8 +18,16 @@ class ArticleDB:
 
     def find_by_id(self, id: int) -> Optional[Article]:
         with self.session() as session:
-            author = session.get(Article, ident=id)
-            return author
+            article = session.get(Article, ident=id)
+            return article
 
-    def create_article(self, title: str, content: str, author_name: str):
-        pass
+    def insert_article(self, article: Article):
+        with self.session() as session:
+            session.add(article)
+            session.commit()
+            return Article(id=article.id,
+                           title=article.title,
+                           author_name=article.author_name,
+                           created=article.created,
+                           last_update=article.last_update,
+                           body=article.body)

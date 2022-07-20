@@ -1,19 +1,19 @@
 from typing import Any, Dict
-from flask.json import JSONDecoder
 from .models import Article
 
 
-def serializeArticle(json: str) -> Dict[str, Any]:
-    data = JSONDecoder().decode(json)
-    return data
-
-
-def deserializeArticle(Article: Article) -> Dict[str, Any]:
+def article_to_dict(Article: Article) -> Dict[str, Any]:
     return {
         'id': Article.id,
         'title': Article.title,
         'author_name': Article.author_name,
         'created': Article.created,
-        'last_updated': Article.last_updated,
+        'last_update': Article.last_update,
         'body': Article.body
     }
+
+
+def dict_to_article(dict: Dict[str, Any]) -> Article:
+    return Article(title=dict['title'],
+                   author_name=dict['author_name'],
+                   body=dict['body'])
