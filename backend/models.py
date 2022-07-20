@@ -22,9 +22,6 @@ class Author(Base):
         return (f"Author(id={self.id}, name={self.name},"
                 "articles={self.articles})")
 
-    def as_dict(self) -> Dict[str, Any]:
-        return {"id": self.id, "name": self.name}
-
 
 class Article(Base):
     """ An article on a blog (blog post).
