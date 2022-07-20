@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, request, jsonify
 from .db import AuthorDB
 from .models import Base
 from . import serializers
@@ -16,5 +16,19 @@ def index():
 @app.get('/authors')
 def get_authors():
     authors = author_db.get_all()
-    return jsonify(list(map(lambda x: serializers.serializeAuthor(x),
-                            authors)))
+    authors_dict = list(map(lambda x: serializers.serializeAuthor(x), authors))
+    return jsonify(authors_dict), 200
+
+
+@app.post('/authors')
+def create_author():
+    # get the request body
+    body = request.form
+    # if the body doesn't have the name
+    if not body.get('name'):
+        # return 401
+        return {"error": "Property 'name' not provided"}, 401
+    # Else, create a new author in the  database
+    author = author_db.create_author(body["name"])
+    # return the newly created author
+    return jsonify(serializers.serializeAuthor(author))

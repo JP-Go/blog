@@ -15,8 +15,9 @@ class AuthorDB:
             stmt = select(Author)
             return session.scalars(stmt).all()
 
-    def create_author(self, name: str):
+    def create_author(self, name: str) -> Author:
         with self.session() as session:
             author = Author(name=name)
             session.add(author)
-            session.commit()
+            session.flush()
+            return author
