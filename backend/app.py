@@ -1,34 +1,28 @@
 from flask import Flask, request, jsonify
-from .db import AuthorDB
+from .db import ArticleDB
 from .models import Base
-from .serializers import serializeAuthor
+from .serializers import serializeArticle
 
 app = Flask(__name__)
-author_db = AuthorDB('sqlite:///test.sqlite')
-Base.metadata.create_all(author_db.engine)
+article_db = ArticleDB('sqlite:///test.sqlite')
+Base.metadata.create_all(article_db.engine)
 
 
 @app.get('/')
 def index():
-    return "<p>Hello</p>"
+    return "Hello"
 
 
-@app.get('/authors')
-def get_authors():
-    authors = author_db.get_all()
-    authors_dict = list(map(lambda x: serializeAuthor(x), authors))
-    return jsonify(authors_dict), 200
+@app.get('/articles')
+def get_articles():
+    pass
 
 
-@app.post('/authors')
-def create_author():
-    # get the request body
-    body = request.form
-    # if the body doesn't have the name
-    if not body.get('name'):
-        # return 401
-        return {"error": "Property 'name' not provided"}, 401
-    # Else, create a new author in the  database
-    author = author_db.create_author(body["name"])
-    # return the newly created author
-    return jsonify(serializeAuthor(author))
+@app.get('/articles/<int:id>')
+def get_article_by_id(id: int):
+    pass
+
+
+@app.post('/articles')
+def create_article():
+    pass

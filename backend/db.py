@@ -1,23 +1,25 @@
-from sqlalchemy import create_engine, select
-from sqlalchemy.orm.session import sessionmaker
-from .models import Author
+from typing import List, Optional
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from .models import Article
 
 
-class AuthorDB:
-    """ A class that represent a Author database"""
+class ArticleDB:
+    """ A class that represent a Article database"""
 
     def __init__(self, uri: str) -> None:
         self.engine = create_engine(uri, echo=True, future=True)
         self.session = sessionmaker(self.engine)
 
-    def get_all(self):
+    def get_all(self) -> List[Article]:
         with self.session() as session:
-            stmt = select(Author)
-            return session.scalars(stmt).all()
+            list = session.query(Article).all()
+            return list
 
-    def create_author(self, name: str) -> Author:
+    def find_by_id(self, id: int) -> Optional[Article]:
         with self.session() as session:
-            author = Author(name=name)
-            session.add(author)
-            session.flush()
+            author = session.get(Article, ident=id)
             return author
+
+    def create_article(self, title: str, content: str, author_name: str):
+        pass
