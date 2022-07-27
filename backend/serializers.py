@@ -1,19 +1,25 @@
-from typing import Any, Dict
+from typing import Dict
 from .models import Article
+from datetime import datetime
 
 
-def article_to_dict(Article: Article) -> Dict[str, Any]:
+def construct_article(data: Dict[str, str]):
+    if not set(['title', 'author_name', 'body']).issubset(data):
+        raise ValueError('Required fields not provided')
+
+    return Article(title=data['title'],
+                   body=data['body'],
+                   author_name=data['author_name'],
+                   created=datetime.now(),
+                   last_update=datetime.now())
+
+
+def deconstruct_article(article: Article):
     return {
-        'id': Article.id,
-        'title': Article.title,
-        'author_name': Article.author_name,
-        'created': Article.created,
-        'last_update': Article.last_update,
-        'body': Article.body
+        'id': article.id,
+        'title': article.title,
+        'body': article.body,
+        'author_name': article.author_name,
+        'created': article.created,
+        'last_update': article.last_update
     }
-
-
-def dict_to_article(dict: Dict[str, Any]) -> Article:
-    return Article(title=dict['title'],
-                   author_name=dict['author_name'],
-                   body=dict['body'])
