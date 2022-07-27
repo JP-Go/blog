@@ -2,6 +2,7 @@ from typing import List, Optional
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from .models import Article
+from .models import Article, Base
 
 
 class ArticleDB:
@@ -31,3 +32,5 @@ class ArticleDB:
                            created=article.created,
                            last_update=article.last_update,
                            body=article.body)
+article_db = ArticleDB('sqlite:///test.sqlite')
+Base.metadata.create_all(article_db.engine)
