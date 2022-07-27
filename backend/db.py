@@ -1,7 +1,6 @@
 from typing import List, Optional
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from .models import Article
 from .models import Article, Base
 
 
@@ -22,15 +21,14 @@ class ArticleDB:
             article = session.get(Article, ident=id)
             return article
 
-    def insert_article(self, article: Article):
+    def insert_article(self, article: Article) -> Article:
         with self.session() as session:
             session.add(article)
+            session.flush()
+            session.expunge(article)
             session.commit()
-            return Article(id=article.id,
-                           title=article.title,
-                           author_name=article.author_name,
-                           created=article.created,
-                           last_update=article.last_update,
-                           body=article.body)
+            return article
+
+
 article_db = ArticleDB('sqlite:///test.sqlite')
 Base.metadata.create_all(article_db.engine)
