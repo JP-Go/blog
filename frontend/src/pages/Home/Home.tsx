@@ -1,42 +1,16 @@
-import { For, Component, createSignal } from "solid-js";
+import { For, Component, createSignal, createEffect } from "solid-js";
 import Card, { CardProps } from "../../components/Card/Card";
 import { HomeContainerStyled, HomeMainStyled } from "./Home.styled";
-
-const mockArticles: CardProps[] = [
-  {
-    meta: {
-			slug:'a-title',
-      title: "A title",
-      description:
-        "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
-      lastUpdated: new Date(),
-      author: "JP",
-    },
-  },
-  {
-    meta: {
-      slug: "another-title",
-      title: "Another title",
-      description:
-        "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
-      lastUpdated: new Date(),
-      author: "JP",
-    },
-  },
-  {
-    meta: {
-      slug: "and-another-title-title",
-      title: "And another title title",
-      description:
-        "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
-      lastUpdated: new Date(),
-      author: "JP",
-    },
-  },
-];
+import {mockApi} from "../../data/api/apiService";
 
 const Home: Component = () => {
-  const [articles] = createSignal<CardProps[]>(mockArticles);
+
+  const [articles,setArticles] = createSignal<CardProps[]>([]);
+
+	createEffect(()=>{
+		const articles = mockApi.getArticles();
+		setArticles(articles)
+	})
 
   return (
     <HomeContainerStyled>
