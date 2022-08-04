@@ -6,6 +6,7 @@ import Home from "./pages/Home/Home";
 import Header from "./components/Header/Header";
 
 import { theme } from "./theme";
+import Article from "./components/Article/Article";
 
 const App: Component = () => {
   return (
@@ -13,6 +14,7 @@ const App: Component = () => {
       <Header />
       <Routes>
         <Route path="/" component={Home} />
+        <Route path="/articles/:id" component={Article} />
       </Routes>
     </ThemeProvider>
   );
