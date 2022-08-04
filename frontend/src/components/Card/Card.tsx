@@ -10,7 +10,7 @@ import {
 
 export interface CardProps {
   meta: {
-    slug: string;
+    id: number;
     title: string;
     description: string;
     lastUpdated: Date;
@@ -22,7 +22,7 @@ const LOCALE = "pt-BR";
 
 const Card: Component<CardProps> = ({ meta }: CardProps) => {
   return (
-    <Link href={`/article/${meta.slug}`} style="text-decoration:none">
+    <Link href={`/articles/${meta.id}`} style="text-decoration:none">
       <CardStyled>
         <CardTitleStyled>{meta.title}</CardTitleStyled>
         <CardSepStyled />
