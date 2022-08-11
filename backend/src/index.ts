@@ -1,5 +1,5 @@
 import express from 'express';
-import articles from './routes/articles.mjs'
+import articles from './routes/articles'
 const app = express();
 
 app.get('/', (_, res) => {
