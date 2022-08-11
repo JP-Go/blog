@@ -7,12 +7,15 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "node index.mjs"
+    "dev": "tsc && node ./dist/index.js"
   },
   "author": "João Pedro",
   "license": "MIT",
   "dependencies": {
+    "@types/express": "^4.17.13",
     "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.4"
   }
 }
