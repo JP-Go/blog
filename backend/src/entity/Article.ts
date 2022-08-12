@@ -1,7 +1,6 @@
 import { Entity } from './Entity';
 
 export type ArticleProps = {
-  id: number;
   title: string;
   body: string;
   authorName: string;
