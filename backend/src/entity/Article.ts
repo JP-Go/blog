@@ -1,18 +1,18 @@
 import { Entity } from './Entity';
 
-export type ArticleProps = {
+export interface ArticleProps {
   title: string;
   body: string;
   authorName: string;
   created: Date;
   lastUpdate: Date;
-};
+}
 
-export type ArticleInputProps = {
+export interface ArticleInputProps {
   title: string;
   body: string;
   authorName: string;
-};
+}
 
 export class Article extends Entity<ArticleProps> {
   private constructor(props: ArticleProps, id?: number) {
