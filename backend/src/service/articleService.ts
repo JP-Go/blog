@@ -5,10 +5,7 @@ export class ArticleService {
   constructor(private articleRepository: Repository<Article>) {}
 
   public getArticles(): Article[] {
-    return this.articleRepository.findAll();
-  }
-
-  public getById(id: number): Article | null {
-    return this.articleRepository.findById(id);
+    const result = this.articleRepository.findAll();
+    return result;
   }
 }
