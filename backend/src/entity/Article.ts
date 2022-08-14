@@ -1,12 +1,17 @@
 import { Entity } from './Entity';
 
 export type ArticleProps = {
-  id: number;
   title: string;
   body: string;
   authorName: string;
   created: Date;
   lastUpdate: Date;
+};
+
+export type ArticleInputProps = {
+  title: string;
+  body: string;
+  authorName: string;
 };
 
 export class Article extends Entity<ArticleProps> {
