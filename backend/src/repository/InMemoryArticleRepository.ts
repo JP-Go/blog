@@ -4,16 +4,16 @@ import { Repository } from './Repository';
 let idCounter = 0;
 
 const articles: Article[] = [
-  {
-    props: {
+  Article.create(
+    {
       body: 'This is a test',
       created: new Date(),
       title: 'test',
       authorName: 'Name',
       lastUpdate: new Date(),
     },
-    id: ++idCounter,
-  },
+    ++idCounter
+  ),
 ];
 
 export class InMemoryArticleRepository implements Repository<Article> {
