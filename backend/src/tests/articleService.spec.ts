@@ -10,13 +10,13 @@ const inputPropsStub: ArticleInputProps = {
 const now = new Date();
 
 describe('ArticleService tests: An ArticleService', () => {
-  let sut: ArticleService;
-
-  beforeAll(() => {
-    sut = new ArticleService(new InMemoryArticleRepository());
-  });
-
   describe('should be able to save articles', () => {
+    let sut: ArticleService;
+
+    beforeAll(() => {
+      sut = new ArticleService(new InMemoryArticleRepository());
+    });
+
     it('shoud be able to save one article with the right data', () => {
       const article = sut.save(inputPropsStub);
       expect(article).toBeInstanceOf(Article);
@@ -48,6 +48,12 @@ describe('ArticleService tests: An ArticleService', () => {
   });
 
   describe('Should be able to get articles', () => {
+    let sut: ArticleService;
+
+    beforeAll(() => {
+      sut = new ArticleService(new InMemoryArticleRepository());
+      sut.save(inputPropsStub);
+    });
     it('should be able to return a collection of articles', () => {
       expect(sut.findAll()).toBeInstanceOf(Array<Article>);
     });
@@ -61,7 +67,6 @@ describe('ArticleService tests: An ArticleService', () => {
     });
 
     it('should return null if article was not found', () => {
-      const sut = new ArticleService(new InMemoryArticleRepository());
       expect(sut.findById(1)).not.toBeNull();
       expect(sut.findById(2)).toBeNull();
     });
