@@ -1,35 +1,32 @@
-import { Component } from "solid-js";
-import { Link } from "solid-app-router";
+import { Component } from 'solid-js';
+import { Link } from 'solid-app-router';
 import {
   CardStyled,
   CardTitleStyled,
   CardDescriptionStyled,
   CardSepStyled,
   CardFooterStyled,
-} from "./Card.styled";
+} from './Card.styled';
+import { Article } from '../../data/@types/article';
 
-export interface CardProps {
-  meta: {
-    id: number;
-    title: string;
-    description: string;
-    lastUpdated: Date;
-    author: string;
-  };
+const LOCALE = 'pt-BR';
+
+interface CardProps {
+  article: Article;
 }
 
-const LOCALE = "pt-BR";
-
-const Card: Component<CardProps> = ({ meta }: CardProps) => {
+const Card: Component<CardProps> = ({ article }: CardProps) => {
+  const { id, props } = article;
+  console.log(props);
   return (
-    <Link href={`/articles/${meta.id}`} style="text-decoration:none">
+    <Link href={`/articles/${id}`} style="text-decoration:none">
       <CardStyled>
-        <CardTitleStyled>{meta.title}</CardTitleStyled>
+        <CardTitleStyled>{props.title}</CardTitleStyled>
         <CardSepStyled />
-        <CardDescriptionStyled>{meta.description}</CardDescriptionStyled>
+        <CardDescriptionStyled>{props.body}</CardDescriptionStyled>
         <CardFooterStyled>
-          <span>{meta.lastUpdated.toLocaleDateString(LOCALE)}</span>
-          <span>{meta.author}</span>
+          <span>{props.lastUpdate.toLocaleDateString(LOCALE)}</span>
+          <span>{props.authorName}</span>
         </CardFooterStyled>
       </CardStyled>
     </Link>

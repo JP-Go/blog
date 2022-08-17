@@ -1,25 +1,15 @@
-import { For, Component, createSignal, createEffect } from "solid-js";
-import Card, { CardProps } from "../../components/Card/Card";
-import { HomeContainerStyled, HomeMainStyled } from "./Home.styled";
-import {mockApi} from "../../data/api/apiService";
+import { For, Component } from 'solid-js';
+import Card from '../../components/Card/Card';
+import { useGetArticles } from '../../data/hooks/useGetArticles';
+import { HomeContainerStyled, HomeMainStyled } from './Home.styled';
 
 const Home: Component = () => {
-
-  const [articles,setArticles] = createSignal<CardProps[]>([]);
-
-	createEffect(()=>{
-		const articles = mockApi.getArticles();
-		setArticles(articles)
-	})
+  const { articles } = useGetArticles();
 
   return (
     <HomeContainerStyled>
       <HomeMainStyled>
-        <For each={articles()}>
-          {({ meta }) => (
-            <Card meta={meta} />
-          )}
-        </For>
+        <For each={articles()}>{(article) => <Card article={article} />}</For>
       </HomeMainStyled>
     </HomeContainerStyled>
   );
